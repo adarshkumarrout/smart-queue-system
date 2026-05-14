@@ -1,0 +1,27 @@
+# Java
+target/
+*.class
+*.jar
+
+# Node
+node_modules/
+build/
+dist/
+
+# Logs
+logs/
+*.log
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+
+# Docker
+docker-data/
+mysql_data/
+
+# Environment
+.env

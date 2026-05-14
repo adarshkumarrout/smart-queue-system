@@ -1,0 +1,242 @@
+{
+  "info": {
+    "name": "SmartQueue API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base",
+      "value": "http://localhost:8080"
+    },
+    {
+      "key": "token",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "url": "{{base}}/api/auth/register",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"username\": \"testuser\", \"email\": \"test@test.com\", \"password\": \"test123\", \"fullName\": \"Test User\"}"
+            }
+          }
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "url": "{{base}}/api/auth/login",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"username\": \"testuser\", \"password\": \"test123\"}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Queues",
+      "item": [
+        {
+          "name": "Get Queues by Branch",
+          "request": {
+            "method": "GET",
+            "url": "{{base}}/api/queues/branch/1",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Join Queue",
+          "request": {
+            "method": "POST",
+            "url": "{{base}}/api/queues/join",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"queueId\": 1, \"priorityType\": \"NORMAL\"}"
+            }
+          }
+        },
+        {
+          "name": "Get Queue Snapshot",
+          "request": {
+            "method": "GET",
+            "url": "{{base}}/api/queues/1",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Serve Next Token",
+          "request": {
+            "method": "POST",
+            "url": "{{base}}/api/queues/1/serve-next",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ]
+          }
+        },
+        {
+          "name": "My Tokens",
+          "request": {
+            "method": "GET",
+            "url": "{{base}}/api/queues/my-tokens",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin",
+      "item": [
+        {
+          "name": "Create Business",
+          "request": {
+            "method": "POST",
+            "url": "{{base}}/api/admin/businesses",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"name\": \"Test Biz\", \"description\": \"Desc\", \"ownerEmail\": \"owner@test.com\"}"
+            }
+          }
+        },
+        {
+          "name": "Create Branch",
+          "request": {
+            "method": "POST",
+            "url": "{{base}}/api/admin/branches",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"name\": \"Main Branch\", \"address\": \"123 Main St\", \"city\": \"Bengaluru\", \"businessId\": 1}"
+            }
+          }
+        },
+        {
+          "name": "Create Queue",
+          "request": {
+            "method": "POST",
+            "url": "{{base}}/api/admin/queues",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"name\": \"General Queue\", \"branchId\": 1, \"maxCapacity\": 50, \"avgServiceTimeMinutes\": 5}"
+            }
+          }
+        },
+        {
+          "name": "Add Staff",
+          "request": {
+            "method": "POST",
+            "url": "{{base}}/api/admin/staff/2/branch/1",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Queue Analytics",
+          "request": {
+            "method": "GET",
+            "url": "{{base}}/api/admin/queues/1/analytics",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Mark No-Show",
+          "request": {
+            "method": "POST",
+            "url": "{{base}}/api/admin/tokens/1/no-show",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
